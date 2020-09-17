@@ -11,8 +11,6 @@ def linearSearch(a, v):
             return i
             break
         i += 1
-        else:
-            return False
 
 arr = [5, 2, 4, 6, 1, 3]
 value = 6
