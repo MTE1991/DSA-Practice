@@ -6,8 +6,8 @@ def linearSearch(a, v):
     
     # if value is found in array, return index
     # of the value, otherwise return 0:
-    while i <= len(a):
-        if a[i] == val:
+    while i < len(a):
+        if a[i] == v:
             return i
             break
         i += 1
