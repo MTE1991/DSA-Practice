@@ -83,3 +83,90 @@ def select_sort(a):
         # the first element:
         a[i], a[min] = a[min], a[i]
 ```
+
+##Searching Algorithms
+
+**Linear Search:**
+
+In computer science, a linear search or sequential search is a method for finding an element within a list. It sequentially checks each element of the list until a match is found or the whole list has been searched.
+
+**Pseudocode**
+
+```
+procedure linear_search (list, value)
+
+   for each item in the list
+      if match item == value
+         return the item's location
+      end if
+   end for
+
+end procedure
+```
+
+**Binary Search:**
+
+In computer science, binary search, also known as half-interval search, logarithmic search, or binary chop, is a search algorithm that finds the position of a target value within a sorted array. Binary search compares the target value to the middle element of the array. If they are not equal, the half in which the target cannot lie is eliminated and the search continues on the remaining half, again taking the middle element to compare to the target value, and repeating this until the target value is found. If the search ends with the remaining half being empty, the target is not in the array.
+
+**Pseudocodes**
+
+```
+function binary_search(A, n, T) is
+    L := 0
+    R := n − 1
+    while L ≤ R do
+        m := floor((L + R) / 2)
+        if A[m] < T then
+            L := m + 1
+        else if A[m] > T then
+            R := m − 1
+        else:
+            return m
+    return unsuccessful
+```
+
+*(Alternate)*
+```
+function binary_search_alternative(A, n, T) is
+    L := 0
+    R := n − 1
+    while L != R do
+        m := ceil((L + R) / 2)
+        if A[m] > T then
+            R := m − 1
+        else:
+            L := m
+    if A[L] = T then
+        return L
+    return unsuccessful
+```
+
+*(Find the leftmost element)*
+
+```
+function binary_search_leftmost(A, n, T):
+    L := 0
+    R := n
+    while L < R:
+        m := floor((L + R) / 2)
+        if A[m] < T:
+            L := m + 1
+        else:
+            R := m
+    return L
+```
+
+*(Find the rightmost element)*
+
+```
+function binary_search_rightmost(A, n, T):
+    L := 0
+    R := n
+    while L < R:
+        m := floor((L + R) / 2)
+        if A[m] > T:
+            R := m
+        else:
+            L := m + 1
+    return R - 1
+ ```
