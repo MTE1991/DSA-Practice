@@ -79,4 +79,7 @@ def select_sort(a):
             if a[min] > a[j]:
                 min = j
 
-        # Swap the found minimum 
+        # Swap the found minimum element with
+        # the first element:
+        a[i], a[min] = a[min], a[i]
+```
