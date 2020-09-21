@@ -34,8 +34,11 @@ Sorting is typically done in-place, by iterating up the array, growing the sorte
 
 The resulting array after k iterations has the property where the first k + 1 entries are sorted ("+1" because the first entry is skipped). In each iteration the first remaining entry of the input is removed, and inserted into the result at the correct position, thus extending the result:
 ![Ins_sort1](https://upload.wikimedia.org/wikipedia/commons/3/32/Insertionsort-before.png)
+
 becomes
+
 ![Ins_sort2](https://upload.wikimedia.org/wikipedia/commons/d/d9/Insertionsort-after.png)
+
 with each element greater than x copied to the right as it is compared against x.
 
 The most common variant of insertion sort, which operates on arrays, can be described as follows:
@@ -76,91 +79,4 @@ def select_sort(a):
             if a[min] > a[j]:
                 min = j
 
-        # Swap the found minimum element with
-        # the first element:
-        a[i], a[min] = a[min], a[i]
-```
-
-## Searching Algorithms
-In computer science, a search algorithm is any algorithm which solves the search problem, namely, to retrieve information stored within some data structure, or calculated in the search space of a problem domain, either with discrete or continuous values.
-
-**Linear Search:**
-Linear search is a very simple search algorithm. In this type of search, a sequential search is made over all items one by one. Every item is checked and if a match is found then that particular item is returned, otherwise the search continues till the end of the data collection. (Tutorialspoint)
-
-**Pseudocode**
-```
-procedure linear_search (list, value)
-
-   for each item in the list
-      if match item == value
-         return the item's location
-      end if
-   end for
-
-end procedure
-```
-
-**Binary Search:**
-In computer science, binary search, also known as half-interval search, logarithmic search, or binary chop, is a search algorithm that finds the position of a target value within a sorted array. Binary search compares the target value to the middle element of the array. If they are not equal, the half in which the target cannot lie is eliminated and the search continues on the remaining half, again taking the middle element to compare to the target value, and repeating this until the target value is found. If the search ends with the remaining half being empty, the target is not in the array. (Wikipedia)
-
-**Pseudocode**
-```
-function binary_search(A, n, T) is
-    L := 0
-    R := n − 1
-    while L ≤ R do
-        m := floor((L + R) / 2)
-        if A[m] < T then
-            L := m + 1
-        else if A[m] > T then
-            R := m − 1
-        else:
-            return m
-    return unsuccessful
-```
-
-**Alternate pseudocode**
-```
-function binary_search_alternative(A, n, T) is
-    L := 0
-    R := n − 1
-    while L != R do
-        m := ceil((L + R) / 2)
-        if A[m] > T then
-            R := m − 1
-        else:
-            L := m
-    if A[L] = T then
-        return L
-    return unsuccessful
-```
-
-**Pseudocodes for duplicate elements**
-
-**(Finding the leftmost element)**
-```
-function binary_search_leftmost(A, n, T):
-    L := 0
-    R := n
-    while L < R:
-        m := floor((L + R) / 2)
-        if A[m] < T:
-            L := m + 1
-        else:
-            R := m
-    return L
-```
-
-**(Finding the rightmost element)**
-```
-function binary_search_rightmost(A, n, T):
-    L := 0
-    R := n
-    while L < R:
-        m := floor((L + R) / 2)
-        if A[m] > T:
-            R := m
-        else:
-            L := m + 1
-    return R - 1
-```
+        # Swap the found minimum 
