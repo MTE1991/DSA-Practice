@@ -9,7 +9,6 @@ def linearSearch(a, v):
     while i < len(a):
         if a[i] == v:
             return i
-            break
         i += 1
 
 arr = [5, 2, 4, 6, 1, 3]
