@@ -136,7 +136,7 @@ function binary_search_alternative(A, n, T) is
 
 **Pseudocodes for duplicate elements**
 
-**Finding the leftmost element**
+**(Finding the leftmost element)**
 ```
 function binary_search_leftmost(A, n, T):
     L := 0
@@ -150,7 +150,7 @@ function binary_search_leftmost(A, n, T):
     return L
 ```
 
-**Finding the rightmost element**
+**(Finding the rightmost element)**
 ```
 function binary_search_rightmost(A, n, T):
     L := 0
