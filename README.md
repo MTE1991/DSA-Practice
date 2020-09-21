@@ -23,6 +23,7 @@ Further, the input data is often stored in an array, which allows random access,
 Sorting algorithms are often referred to as a word followed by the word "sort" and grammatically are used in English as noun phrases, for example in the sentence, "it is inefficient to use insertion sort on large lists" the phrase insertion sort refers to the insertion sort sorting algorithm. (Wikipedia)
 
 **Insertion Sort:**
+
 Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time.
 
 **Algorithm**
