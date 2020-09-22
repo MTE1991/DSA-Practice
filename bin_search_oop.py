@@ -19,17 +19,6 @@ class Search:
             else: return m
         raise ValueError("Target value not found!")
     
-    # Alternate method for binary search:
-    def bin_search_alt(self):
-        l = 0
-        r = self.n - 1
-        while l != r:
-            m = int(ceil(l + r) / 2)
-            if self.arr[m] < self.target: r = m - 1
-            else: l = m
-            if self.arr[l] == self.target: return l
-        raise ValueError("Target value not found!")
-
     # For duplicate elements:
 
     # Check if duplicate element exists:
