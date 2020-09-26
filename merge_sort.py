@@ -1,44 +1,33 @@
 def merge_sort(arr):
-    if len(arr) <= 1: return arr
-    elif len(arr) > 1:
-        mid = len(arr) // 2
-        left = arr[:mid]
-        right = arr[mid:]
 
-        # Recursive call on each half
-        merge_sort(left)
-        merge_sort(right)
+    if len(arr) > 1:
+        # Midpoint to divide the array into two halves:
+        m = len(arr) // 2
 
-        # Two iterators for traversing the two halves
-        i = 0
-        j = 0
+        l = arr[:m]  # left half
+        r = arr[m:]  # right half
 
-        # Iterator for the main list
-        k = 0
+        # Recursively divide both halves untill its length
+        # becomes 1:
+        l = merge_sort(l)
+        r = merge_sort(r)
 
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-              # The value from the left half has been used
-              arr[k] = left[i]
-              # Move the iterator forward
-              i += 1
+        # Merge the two halves:
+        arr = []  # Sorted array
+
+        while len(l) > 0 and len(r) > 0:
+            if l[0] > r[0]:
+                arr.append(r[0])
+                r.pop(0)
             else:
-                arr[k] = right[j]
-                j += 1
-            # Move to the next slot
-            k += 1
+                arr.append(l[0])
+                l.pop(0)
 
-        # For all the remaining values
-        while i < len(left):
-            arr[k] = left[i]
-            i += 1
-            k += 1
+        for i in l:
+            arr.append(i)
+        for i in r:
+            arr.append(i)
 
-        while j < len(right):
-            arr[k] = right[j]
-            j += 1
-            k += 1
+    return arr
 
-arr = [54,26,93,17,77,31,44,55,20,31,54,21,87,41]
-merge_sort(arr)
-print(arr)
+print(merge_sort([38, 27, 43, 3, 9, 82, 10]))
