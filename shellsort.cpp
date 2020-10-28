@@ -32,7 +32,7 @@ int main()
     int arr[] = {35, 12, 6, 9, 13, 8, 6, 4, 31}; 
     int n = sizeof(arr)/sizeof(arr[0]); 
 
-    shellSort(arr, n); 
+    shell_sort(arr, n); 
   
     cout << "Array after sorting: ";
     
