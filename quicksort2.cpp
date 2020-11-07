@@ -16,7 +16,7 @@ int partition(int arr[], int p, int r) {
 
     for (int j = p; j <= r - 1; j++) {     
         if (arr[j] <= q) { 
-            i++;    // increment index of smaller element 
+            i++;
             swap(&arr[i], &arr[j]); 
         } 
     } 
@@ -24,15 +24,13 @@ int partition(int arr[], int p, int r) {
     return (i + 1); 
 } 
 
-  
 /* QuickSort procedure (tail recursion)
 arr[] --> Array to be sorted, 
 p  --> Starting index, 
 r  --> Ending index */
 void quick_sort(int arr[], int p, int r) { 
     while (p < r) { 
-        /* q is partitioning index, arr[p] is now at right place */
-        int q = partition(arr, p, r); 
+        int q = partition(arr, p, r); // partition index
         quick_sort(arr, p, q - 1); 
         p = q + 1;
     } 
