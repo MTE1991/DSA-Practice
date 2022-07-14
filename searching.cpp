@@ -17,7 +17,7 @@ int linearSearch(vector<int> A, int target) {
 int binarySearch(vector<int> A, int target) {
 	int high = A.size();
 	int low = 0;
-	while (high != low) {
+	while (low <= high) {
 		int mid = (low + high) / 2;
 		if (A[mid] == target) {
 			return mid;
