@@ -220,8 +220,6 @@ partition (arr[], low, high)
 
 **Counting Sort:**
 
-
-
 Pseudocode:
 ```
 function CountingSort(input, k)
@@ -376,3 +374,430 @@ function binary_search_rightmost(A, n, T):
             L := m + 1
     return R - 1
  ```
+
+## Data Structures
+
+**Linked Lists:**
+In computer science, a linked list is a linear collection of data elements whose order is not given by their physical placement in memory. Instead, each element points to the next. It is a data structure consisting of a collection of nodes which together represent a sequence. (Wikipedia)
+
+Singly Linked List:
+
+![ll](https://cdn.programiz.com/sites/tutorial2program/files/linked-list-concept.png)
+
+```C++
+// Linked list implementation in C++
+
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+// Creating a node
+class Node {
+   public:
+  int value;
+  Node* next;
+};
+
+int main() {
+  Node* head;
+  Node* one = NULL;
+  Node* two = NULL;
+  Node* three = NULL;
+
+  // allocate 3 nodes in the heap
+  one = new Node();
+  two = new Node();
+  three = new Node();
+
+  // Assign value values
+  one->value = 1;
+  two->value = 2;
+  three->value = 3;
+
+  // Connect nodes
+  one->next = two;
+  two->next = three;
+  three->next = NULL;
+
+  // print the linked list value
+  head = one;
+  while (head != NULL) {
+    cout << head->value;
+    head = head->next;
+  }
+}
+```
+
+```C++
+// Linked list operations in C++
+
+#include <stdlib.h>
+
+#include <iostream>
+using namespace std;
+
+// Create a node
+struct Node {
+  int data;
+  struct Node* next;
+};
+
+void insertAtBeginning(struct Node** head_ref, int new_data) {
+  // Allocate memory to a node
+  struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+
+  // insert the data
+  new_node->data = new_data;
+  new_node->next = (*head_ref);
+
+  // Move head to new node
+  (*head_ref) = new_node;
+}
+
+// Insert a node after a node
+void insertAfter(struct Node* prev_node, int new_data) {
+  if (prev_node == NULL) {
+  cout << "the given previous node cannot be NULL";
+  return;
+  }
+
+  struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+  new_node->data = new_data;
+  new_node->next = prev_node->next;
+  prev_node->next = new_node;
+}
+
+// Insert at the end
+void insertAtEnd(struct Node** head_ref, int new_data) {
+  struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+  struct Node* last = *head_ref; /* used in step 5*/
+
+  new_node->data = new_data;
+  new_node->next = NULL;
+
+  if (*head_ref == NULL) {
+  *head_ref = new_node;
+  return;
+  }
+
+  while (last->next != NULL) last = last->next;
+
+  last->next = new_node;
+  return;
+}
+
+// Delete a node
+void deleteNode(struct Node** head_ref, int key) {
+  struct Node *temp = *head_ref, *prev;
+
+  if (temp != NULL && temp->data == key) {
+  *head_ref = temp->next;
+  free(temp);
+  return;
+  }
+  // Find the key to be deleted
+  while (temp != NULL && temp->data != key) {
+  prev = temp;
+  temp = temp->next;
+  }
+
+  // If the key is not present
+  if (temp == NULL) return;
+
+  // Remove the node
+  prev->next = temp->next;
+
+  free(temp);
+}
+
+// Search a node
+bool searchNode(struct Node** head_ref, int key) {
+  struct Node* current = *head_ref;
+
+  while (current != NULL) {
+  if (current->data == key) return true;
+  current = current->next;
+  }
+  return false;
+}
+
+// Sort the linked list
+void sortLinkedList(struct Node** head_ref) {
+  struct Node *current = *head_ref, *index = NULL;
+  int temp;
+
+  if (head_ref == NULL) {
+  return;
+  } else {
+  while (current != NULL) {
+    // index points to the node next to current
+    index = current->next;
+
+    while (index != NULL) {
+    if (current->data > index->data) {
+      temp = current->data;
+      current->data = index->data;
+      index->data = temp;
+    }
+    index = index->next;
+    }
+    current = current->next;
+  }
+  }
+}
+
+// Print the linked list
+void printList(struct Node* node) {
+  while (node != NULL) {
+  cout << node->data << " ";
+  node = node->next;
+  }
+}
+
+// Driver program
+int main() {
+  struct Node* head = NULL;
+
+  insertAtEnd(&head, 1);
+  insertAtBeginning(&head, 2);
+  insertAtBeginning(&head, 3);
+  insertAtEnd(&head, 4);
+  insertAfter(head->next, 5);
+
+  cout << "Linked list: ";
+  printList(head);
+
+  cout << "\nAfter deleting an element: ";
+  deleteNode(&head, 3);
+  printList(head);
+
+  int item_to_find = 3;
+  if (searchNode(&head, item_to_find)) {
+  cout << endl << item_to_find << " is found";
+  } else {
+  cout << endl << item_to_find << " is not found";
+  }
+
+  sortLinkedList(&head);
+  cout << "\nSorted List: ";
+  printList(head);
+}
+```
+
+**Stacks:**
+![stacks](https://cdn.programiz.com/sites/tutorial2program/files/stack.png)
+
+A stack is a linear data structure that follows the principle of Last In First Out (LIFO). This means the last element inserted inside the stack is removed first.
+
+![stack_ops](https://cdn.programiz.com/sites/tutorial2program/files/stack-operations.png)
+
+ ```C++
+ // Stack implementation in C++
+
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+#define MAX 10
+int size = 0;
+
+// Creating a stack
+struct stack {
+  int items[MAX];
+  int top;
+};
+typedef struct stack st;
+
+void createEmptyStack(st *s) {
+  s->top = -1;
+}
+
+// Check if the stack is full
+int isfull(st *s) {
+  if (s->top == MAX - 1)
+    return 1;
+  else
+    return 0;
+}
+
+// Check if the stack is empty
+int isempty(st *s) {
+  if (s->top == -1)
+    return 1;
+  else
+    return 0;
+}
+
+// Add elements into stack
+void push(st *s, int newitem) {
+  if (isfull(s)) {
+    cout << "STACK FULL";
+  } else {
+    s->top++;
+    s->items[s->top] = newitem;
+  }
+  size++;
+}
+
+// Remove element from stack
+void pop(st *s) {
+  if (isempty(s)) {
+    cout << "\n STACK EMPTY \n";
+  } else {
+    cout << "Item popped= " << s->items[s->top];
+    s->top--;
+  }
+  size--;
+  cout << endl;
+}
+
+// Print elements of stack
+void printStack(st *s) {
+  printf("Stack: ");
+  for (int i = 0; i < size; i++) {
+    cout << s->items[i] << " ";
+  }
+  cout << endl;
+}
+
+// Driver code
+int main() {
+  int ch;
+  st *s = (st *)malloc(sizeof(st));
+
+  createEmptyStack(s);
+
+  push(s, 1);
+  push(s, 2);
+  push(s, 3);
+  push(s, 4);
+
+  printStack(s);
+
+  pop(s);
+
+  cout << "\nAfter popping out\n";
+  printStack(s);
+}
+ ```
+ 
+ **Queue:**
+ 
+ ![Queue](https://cdn.programiz.com/sites/tutorial2program/files/queue.png)
+ 
+ A queue is a useful data structure in programming. It is similar to the ticket queue outside a cinema hall, where the first person entering the queue is the first person who gets the ticket.
+
+Queue follows the First In First Out (FIFO) rule - the item that goes in first is the item that comes out first.
+
+Code:
+```C++
+// Queue implementation in C++
+
+#include <iostream>
+#define SIZE 5
+
+using namespace std;
+
+class Queue {
+   private:
+  int items[SIZE], front, rear;
+
+   public:
+  Queue() {
+    front = -1;
+    rear = -1;
+  }
+
+  bool isFull() {
+    if (front == 0 && rear == SIZE - 1) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isEmpty() {
+    if (front == -1)
+      return true;
+    else
+      return false;
+  }
+
+  void enQueue(int element) {
+    if (isFull()) {
+      cout << "Queue is full";
+    } else {
+      if (front == -1) front = 0;
+      rear++;
+      items[rear] = element;
+      cout << endl
+         << "Inserted " << element << endl;
+    }
+  }
+
+  int deQueue() {
+    int element;
+    if (isEmpty()) {
+      cout << "Queue is empty" << endl;
+      return (-1);
+    } else {
+      element = items[front];
+      if (front >= rear) {
+        front = -1;
+        rear = -1;
+      } /* Q has only one element, so we reset the queue after deleting it. */
+      else {
+        front++;
+      }
+      cout << endl
+         << "Deleted -> " << element << endl;
+      return (element);
+    }
+  }
+
+  void display() {
+    /* Function to display elements of Queue */
+    int i;
+    if (isEmpty()) {
+      cout << endl
+         << "Empty Queue" << endl;
+    } else {
+      cout << endl
+         << "Front index-> " << front;
+      cout << endl
+         << "Items -> ";
+      for (i = front; i <= rear; i++)
+        cout << items[i] << "  ";
+      cout << endl
+         << "Rear index-> " << rear << endl;
+    }
+  }
+};
+
+int main() {
+  Queue q;
+
+  //deQueue is not possible on empty queue
+  q.deQueue();
+
+  //enQueue 5 elements
+  q.enQueue(1);
+  q.enQueue(2);
+  q.enQueue(3);
+  q.enQueue(4);
+  q.enQueue(5);
+
+  // 6th element can't be added to because the queue is full
+  q.enQueue(6);
+
+  q.display();
+
+  //deQueue removes element entered first i.e. 1
+  q.deQueue();
+
+  //Now we have just 4 elements
+  q.display();
+
+  return 0;
+}
+```
