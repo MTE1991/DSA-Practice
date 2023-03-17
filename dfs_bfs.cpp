@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <stack>
-#include <queue>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class Graph {
@@ -19,6 +15,17 @@ public:
     void addEdge(int u, int v) {
         adj[u].push_back(v);
         adj[v].push_back(u); // for undirected graph
+    }
+
+    void printGraph() // function to print the graph 
+    { 
+        for (int i = 0; i < V; i++) {
+            cout << i << " -> ";
+            for (auto v : adj[i]) {
+                cout << v << " ";
+            }
+            cout << "\n";
+        }
     }
 
     void DFS(int start) {
@@ -85,6 +92,8 @@ int main() {
     g.addEdge(3, 4);
     g.addEdge(3, 5);
     g.addEdge(4, 5);
+
+    g.printGraph();
 
     cout << "DFS traversal starting from vertex 0: ";
     g.DFS(0);
