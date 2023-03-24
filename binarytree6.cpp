@@ -140,6 +140,7 @@ bool tree_includes(Node* root, int target_val) {
     return tree_includes(root->left, target_val) or tree_includes(root->right, target_val);
 }
 
+/*
 // tree min value (Breadth first, iterative)
 int tree_min_value(Node* root) {
     queue<Node*> queue;
@@ -162,7 +163,15 @@ int tree_min_value(Node* root) {
     }
     return min;
 }
+*/ 
 
+// tree min values (Depth first, recursive)
+int tree_min_value(Node* root) {
+    if (root == nullptr) {
+        return numeric_limits<int>::max();
+    }
+    return min({root->val, tree_min_value(root->left), tree_min_value(root->right)});
+}
 
 int main() {
     /*
