@@ -173,6 +173,30 @@ int tree_min_value(Node* root) {
     return min({root->val, tree_min_value(root->left), tree_min_value(root->right)});
 }
 
+// max root to leaf path sum:
+int max_path_sum(Node* root) {
+    if (root == nullptr) {
+        return numeric_limits<int>::min();
+    }
+    if (root->left == nullptr && root->right == nullptr) {
+        return root->val;
+    }
+    return root->val + std::max(
+        max_path_sum(root->left),
+        max_path_sum(root->right)
+    );
+}
+
+// Max Depth of a binary tree:
+int find_depth(Node* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    int left_depth = find_depth(root->left);
+    int right_depth = find_depth(root->right);
+    return 1 + max(left_depth, right_depth);
+}
+
 int main() {
     /*
     The tree is supposed to look like this:
@@ -181,6 +205,8 @@ int main() {
                5   3
               / \   \ 
               4 2    8
+                     /\
+                    10 1
     */
 
     Node Root(10); // root node
@@ -189,6 +215,8 @@ int main() {
     Node c(2);
     Node d(4);
     Node e(8);
+    Node f(10);
+    Node g(1);
 
     // make left and right subtrees
     Root.left = &b;
@@ -196,6 +224,8 @@ int main() {
     b.left = &d;
     b.right = &c;
     a.right = &e;
+    e.left = &f;
+    e.right = &g;
 
     vector<int> node_values;
 
@@ -230,5 +260,9 @@ int main() {
 
     // print the min value of tree:
     cout << "Minimum value in this tree: " << tree_min_value(&Root) << endl;
+    // max root to leaf path sum:
+    cout << "Max root to leaf path sum = " << max_path_sum(&Root) << endl;
+    // depth
+    cout << "Maximum depth = " << find_depth(&Root) << endl;
     return 0;
 }
