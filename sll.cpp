@@ -34,7 +34,8 @@ public:
     }
     
     void insertAtBeginning(int data) {
-        Node* newNode = new Node(data);
+        Node* newNode = new Node;
+        newNode->data = data;
 
         // Set the "next" pointer of the new node to the current head
         newNode->next = head;
@@ -44,8 +45,9 @@ public:
     }
     
     void insertAtEnd(int data) {
-        Node* newNode = new Node(data);
-
+        Node* newNode = new Node;
+        newNode->data = data;
+        
         // If the linked list is empty, make the new node the head
         if (head == nullptr) {
             head = newNode;
@@ -105,10 +107,20 @@ public:
 
 int main() {
     LinkedList ll;
+
     ll.insert(5, 1);
     ll.insert(12, 2);
     ll.insert(8, 3);
     ll.insert(15, 4);
+
+    std::cout << "current list: ";
     ll.traverse();
+
+    ll.insertAtBeginning(13);
+    ll.insertAtEnd(49);
+
+    std::cout << "after insertions at start and end: ";
+    ll.traverse();
+
     return 0;
 }
