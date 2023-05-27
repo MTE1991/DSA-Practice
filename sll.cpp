@@ -32,6 +32,35 @@ public:
         temp->next = temp2->next;
         temp2->next = temp;
     }
+    
+    void insertAtBeginning(int data) {
+        Node* newNode = new Node(data);
+
+        // Set the "next" pointer of the new node to the current head
+        newNode->next = head;
+
+        // Make the new node the new head
+        head = newNode;
+    }
+    
+    void insertAtEnd(int data) {
+        Node* newNode = new Node(data);
+
+        // If the linked list is empty, make the new node the head
+        if (head == nullptr) {
+            head = newNode;
+            return;
+        }
+
+        // Traverse the linked list until the last node
+        Node* current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+
+        // Set the "next" pointer of the last node to the new node
+        current->next = newNode;
+    }
 
     void remove(int pos) {
         Node* temp = head;
