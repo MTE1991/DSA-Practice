@@ -1,126 +1,171 @@
-/* From chatGPT */
-
-#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Node {
     int data;
-    Node* next;
+    Node *next;
 };
 
-class LinkedList {
-private:
-    Node* head;
-public:
-    LinkedList() { head = NULL; }
+Node *head = nullptr;
 
-    void insert(int data, int pos) {
-        Node* temp = new Node;
-        temp->data = data;
-        temp->next = NULL;
-
-        if (pos == 1) {
-            temp->next = head;
-            head = temp;
-            return;
-        }
-
-        Node* temp2 = head;
-        for (int i = 0; i < pos - 2; i++) {
-            temp2 = temp2->next;
-        }
-
-        temp->next = temp2->next;
-        temp2->next = temp;
+void printList() {
+    Node *curr = head;
+    while (curr) {
+        cout << curr-> data << " ";
+        curr = curr->next;
     }
-    
-    void insertAtBeginning(int data) {
-        Node* newNode = new Node;
-        newNode->data = data;
+    cout << endl;
+}
 
-        // Set the "next" pointer of the new node to the current head
+
+void insertFirst(int data) {
+    Node *newNode;
+    newNode = new Node;
+    newNode->data = data;
+    newNode->next = head;
+    head = newNode;
+}
+
+void insertAt(int pos, int data) {
+    Node *newNode = new Node;
+    newNode->data = data;
+    newNode->next = nullptr;
+    if (pos < 1) {
+        cout << "Invalid position.\n";
+        return;
+    }
+    if (pos == 1) {
         newNode->next = head;
-
-        // Make the new node the new head
         head = newNode;
+        return;
     }
-    
-    void insertAtEnd(int data) {
-        Node* newNode = new Node;
-        newNode->data = data;
-        
-        // If the linked list is empty, make the new node the head
-        if (head == nullptr) {
-            head = newNode;
-            return;
+    Node *prev = head;
+    for (int i = 1; i < pos - 1; i++) {
+        if (prev) {
+            prev = prev->next;
         }
+    }
+    newNode->next = prev->next;
+    prev->next = newNode;
+}
 
-        // Traverse the linked list until the last node
-        Node* current = head;
-        while (current->next != nullptr) {
-            current = current->next;
-        }
+void insertAtEnd(int data) {
+    Node *newNode = new Node;
+    newNode->data = data;
+    newNode->next = nullptr;
 
-        // Set the "next" pointer of the last node to the new node
-        current->next = newNode;
+    Node *last = head;
+
+    if (!head) {
+        head = newNode;
+        return;
     }
 
-    void remove(int pos) {
-        Node* temp = head;
-        if (pos == 1) {
-            head = temp->next;
+    while (last->next) {
+        last = last->next;
+    }
+
+    last->next = newNode;
+}
+
+void deleteFront() {
+    Node *curr = head;
+    head = head->next;
+    delete curr;
+}
+
+void deleteBack() {
+    Node *end = head;
+    Node *prev = NULL;
+    while(end->next)
+    {
+        prev = end;
+        end = end->next;
+    }
+    prev->next = NULL;
+    delete end;
+}
+
+void reverseList() {
+    Node* current = head;
+    Node *prev = NULL, *next = NULL;
+
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+}
+
+void deleteNode(int pos) {
+    Node *temp = head;
+    Node *prev = head;
+    if (pos == 1) {
+        head = head->next;
+        delete temp;
+        return;
+    }
+    for (int i = 0; i < pos; i++) {
+        if (i == pos - 1 and temp) {
+            prev->next = temp->next;
             delete temp;
-            return;
-        }
-
-        for (int i = 0; i < pos - 2; i++) {
-            temp = temp->next;
-        }
-
-        Node* temp2 = temp->next;
-        temp->next = temp2->next;
-        delete temp2;
-    }
-
-    void search(int data) {
-        Node* temp = head;
-        int pos = 1;
-        while (temp != NULL) {
-            if (temp->data == data) {
-                std::cout << "Element found at position: " << pos << std::endl;
-                return;
+        } else {
+            prev = temp;
+            if (prev == NULL) {
+                break;
             }
             temp = temp->next;
-            pos++;
         }
-        std::cout << "Element not found." << std::endl;
     }
+}
 
-    void traverse() {
-        Node* temp = head;
-        while (temp != NULL) {
-            std::cout << temp->data << " ";
-            temp = temp->next;
-        }
-        std::cout << std::endl;
-    }
-};
+
 
 int main() {
-    LinkedList ll;
+    Node *a = new Node;
+    Node *b = new Node;
+    Node *c = new Node;
+    head = a;
 
-    ll.insert(5, 1);
-    ll.insert(12, 2);
-    ll.insert(8, 3);
-    ll.insert(15, 4);
+    a->data = 3;
+    a->next = b;
+    b->data = 5;
+    b->next = c;
+    c->data = 7;
+    c->next = nullptr;
 
-    std::cout << "current list: ";
-    ll.traverse();
+    printList();
 
-    ll.insertAtBeginning(13);
-    ll.insertAtEnd(49);
+    insertFirst(8);
+    insertFirst(12);
 
-    std::cout << "after insertions at start and end: ";
-    ll.traverse();
+    printList();
+
+    insertAt(3, 21);
+
+    printList();
+
+    insertAtEnd(52);
+
+    printList();
+
+    deleteFront();
+
+    printList();
+
+    deleteBack();
+
+    printList();
+
+    deleteNode(4);
+
+    printList();
+
+    reverseList();
+
+    printList();
 
     return 0;
 }
