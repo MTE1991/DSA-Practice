@@ -123,6 +123,37 @@ void printList() {
     cout << endl;
 }
 
+void twoWayTraverse(Node* curr) {
+    char direction;
+    cout << "Enter (L) to go left and (R) to go right (Q to quit): ";
+    cin >> direction;
+    cout << "Starting from: " << curr->data << endl;
+    if (toupper(direction) == 'L') {
+        curr = curr->prev;
+        if (curr) {
+            cout << "Data: " << curr->data << endl;
+            twoWayTraverse(curr);
+        } else {
+            cout << "No data at previous position. Returning to head...\n";
+            curr = head;
+            twoWayTraverse(curr);
+        }
+    } else if (toupper(direction) == 'R') {
+        curr = curr->next;
+        if (curr) {
+            cout << "Data: " << curr->data << endl;
+            twoWayTraverse(curr);
+        } else {
+            cout << "No data at next position. Returning to head...\n";
+            curr = head;
+            twoWayTraverse(curr);
+        }
+    } else {
+        cout << "Successfully exited the function.\n";
+        return;
+    }
+}
+
 int main() {
     cout << "Ekleel\n";
 
@@ -130,22 +161,23 @@ int main() {
     insertAtHead(2);
     insertAtHead(3);
     insertAtHead(4);
-    printList();
+    insertAtHead(6);
+    //printList();
 
     insertAt(5, 2);
-    printList();
+    //printList();
 
     insertAtEnd(13);
-    printList();
+    //printList();
 
     deleteAtFront();
-    printList();
+    //printList();
 
     deleteAt(3);
-    printList();
+    //printList();
 
     deleteLast();
     printList();
-
+    twoWayTraverse(head);
     return 0;
 }
