@@ -111,7 +111,7 @@ void deleteLast() {
     }
     Node* last = curr;
     curr->prev->next = nullptr;
-    delete last, curr;
+    delete curr;
 }
 
 void printList() {
@@ -123,6 +123,24 @@ void printList() {
     cout << endl;
 }
 
+void reverseList() {
+    Node* curr = head; 
+    Node* temp = nullptr;
+
+    while (curr) {
+        temp = curr->prev;
+        curr->prev = curr->next;
+        curr->next = temp;
+        curr = curr->prev;
+    }
+
+    // Corner cases (empty list, list w/ just 1 node)
+    if (temp) {
+        head = temp->prev;
+    }
+}
+
+/*
 void twoWayTraverse(Node* curr) {
     char direction;
     cout << "Enter (L) to go left and (R) to go right (Q to quit): ";
@@ -153,6 +171,7 @@ void twoWayTraverse(Node* curr) {
         return;
     }
 }
+*/
 
 int main() {
     cout << "Ekleel\n";
@@ -162,22 +181,24 @@ int main() {
     insertAtHead(3);
     insertAtHead(4);
     insertAtHead(6);
-    //printList();
+    printList();
 
     insertAt(5, 2);
-    //printList();
+    printList();
 
     insertAtEnd(13);
-    //printList();
+    printList();
 
     deleteAtFront();
-    //printList();
+    printList();
 
     deleteAt(3);
-    //printList();
+    printList();
 
     deleteLast();
     printList();
-    twoWayTraverse(head);
+    reverseList();
+    printList();
+    //twoWayTraverse(head);
     return 0;
 }
