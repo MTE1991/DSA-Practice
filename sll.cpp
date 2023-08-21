@@ -76,7 +76,7 @@ void deleteFront() {
 }
 
 void deleteNode(int pos) {
-    if (head == nullptr) {
+    if (!head) {
         cout << "List is empty!\n";
         return;
     }
@@ -118,9 +118,9 @@ void deleteBack() {
 
 void reverseList() {
     Node* current = head;
-    Node *prev = NULL, *next = NULL;
+    Node *prev = nullptr, *next = head;
 
-    while (current != NULL) {
+    while (current) {
         next = current->next;
         current->next = prev;
         prev = current;
@@ -141,7 +141,9 @@ int main() {
     printList();
     deleteBack();
     printList();
-    deleteNode(6);
+    deleteNode(3);
+    printList();
+    reverseList();
     printList();
     return 0;
 }
