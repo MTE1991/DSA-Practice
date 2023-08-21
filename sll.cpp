@@ -43,6 +43,7 @@ void insertAt(int pos, int data) {
     for (int i = 1; i < pos - 1; i++) {
         if (prev) {
             prev = prev->next;
+            //cout << " value = " << prev->data << " ";
         }
     }
     newNode->next = prev->next;
@@ -74,15 +75,44 @@ void deleteFront() {
     delete curr;
 }
 
+void deleteNode(int pos) {
+    if (head == nullptr) {
+        cout << "List is empty!\n";
+        return;
+    }
+
+    if (pos == 1) {
+        deleteFront();
+        return;
+    }
+
+    Node* curr = head;
+    for (int i = 0; i < pos - 2; i++) {
+        if (curr == nullptr or curr->next == nullptr) {
+            // out of bounds
+            return;
+        }
+        curr = curr->next;
+    }
+
+    Node* temp = curr->next; // n-th pos
+    if (temp == nullptr) {
+        // out of bounds
+        return;
+    }
+    
+    curr->next = temp->next; // Re-link the list
+    delete temp; 
+}
+
 void deleteBack() {
     Node *end = head;
-    Node *prev = NULL;
-    while(end->next)
-    {
+    Node *prev = nullptr;
+    while (end->next) {
         prev = end;
         end = end->next;
     }
-    prev->next = NULL;
+    prev->next = nullptr;
     delete end;
 }
 
@@ -99,73 +129,19 @@ void reverseList() {
     head = prev;
 }
 
-void deleteNode(int pos) {
-    Node *temp = head;
-    Node *prev = head;
-    if (pos == 1) {
-        head = head->next;
-        delete temp;
-        return;
-    }
-    for (int i = 0; i < pos; i++) {
-        if (i == pos - 1 and temp) {
-            prev->next = temp->next;
-            delete temp;
-        } else {
-            prev = temp;
-            if (prev == NULL) {
-                break;
-            }
-            temp = temp->next;
-        }
-    }
-}
-
-
 
 int main() {
-    Node *a = new Node;
-    Node *b = new Node;
-    Node *c = new Node;
-    head = a;
-
-    a->data = 3;
-    a->next = b;
-    b->data = 5;
-    b->next = c;
-    c->data = 7;
-    c->next = nullptr;
-
+    insertAtEnd(1);
+    insertAtEnd(2);
+    insertAtEnd(3);
+    insertAtEnd(4);
+    insertAtEnd(5);
     printList();
-
-    insertFirst(8);
-    insertFirst(12);
-
+    insertAt(4, 42);
     printList();
-
-    insertAt(3, 21);
-
-    printList();
-
-    insertAtEnd(52);
-
-    printList();
-
-    deleteFront();
-
-    printList();
-
     deleteBack();
-
     printList();
-
-    deleteNode(4);
-
+    deleteNode(6);
     printList();
-
-    reverseList();
-
-    printList();
-
     return 0;
 }
