@@ -73,7 +73,7 @@ void deleteAtFront() {
         return;
     }
     Node* curr = head;
-    head = head->next;
+    head = curr->next;
     head->prev = nullptr;
     delete curr;
 }
