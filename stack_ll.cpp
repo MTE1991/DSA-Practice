@@ -37,7 +37,7 @@ int pop() {
     
     int poppedValue = top->data;
     Node* temp = top;
-    top = top->next;
+    top = temp->next;
     delete temp; // free(temp) 
     return poppedValue;
 }
