@@ -71,7 +71,7 @@ void insertAtEnd(int data) {
 
 void deleteFront() {
     Node *curr = head;
-    head = head->next;
+    head = curr->next;
     delete curr;
 }
 
