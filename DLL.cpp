@@ -79,8 +79,8 @@ void deleteAtFront() {
 }
 
 void deleteAt(int pos) {
-    if (pos <= 1) {
-        cout << "Invalid position.\n";
+    if (pos < 1) {
+        cout << "Invalid position!\n";
         return;
     }
     if (pos == 1) {
@@ -88,11 +88,12 @@ void deleteAt(int pos) {
         return;
     }
     if (!head) {
-        cout << "Cannot delete from empty list.\n";
+        cout << "Empty list!\n";
         return;
     }
+
     Node* curr = head;
-    for (int i = 0; i < pos - 2; i++) {
+    for (int i = 0; i < pos - 1; i++) {
         curr = curr->next;
     }
     if (curr->prev) {
