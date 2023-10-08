@@ -6,8 +6,17 @@ using namespace std;
 int Queue[SIZE];
 int front = -1, rear = -1;
 
+/*
 bool isFull() {
     if ((front == 0 && rear == SIZE - 1) or (front == rear + 1)) {
+        return true;
+    }
+    return false;
+}
+*/
+
+bool isFull() {
+    if ((rear + 1) % SIZE == front) {
         return true;
     }
     return false;
