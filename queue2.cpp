@@ -16,10 +16,7 @@ bool isFull() {
 */
 
 bool isFull() {
-    if ((rear + 1) % SIZE == front) {
-        return true;
-    }
-    return false;
+    return (rear + 1) % SIZE == front;
 }
 
 bool isEmpty() {
