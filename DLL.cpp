@@ -33,15 +33,11 @@ void insertAt(int data, int pos) {
         cout << "Invalid position.\n";
         return;
     }
-    if (pos == 1) {
+    if (!head or pos == 1) {
         insertAtHead(data);
         return;
     }
     Node *newNode = createNode(data);
-    if (!head) {
-        head = newNode;
-        return;
-    }
     Node* curr = head;
     for (int i = 0; i < pos - 2; i++) {
         curr = curr->next;
@@ -73,14 +69,13 @@ void deleteAtFront() {
         return;
     }
     Node* curr = head;
-    head = curr->next;
-    head->prev = nullptr;
+    head = head->next;
     delete curr;
 }
 
 void deleteAt(int pos) {
-    if (pos < 1) {
-        cout << "Invalid position!\n";
+    if (pos <= 1) {
+        cout << "Invalid position.\n";
         return;
     }
     if (pos == 1) {
@@ -88,14 +83,14 @@ void deleteAt(int pos) {
         return;
     }
     if (!head) {
-        cout << "Empty list!\n";
+        cout << "Cannot delete from empty list.\n";
         return;
     }
-
     Node* curr = head;
-    for (int i = 0; i < pos - 1; i++) {
+    for (int i = 0; i < pos - 2; i++) {
         curr = curr->next;
     }
+    curr = curr->next;
     if (curr->prev) {
         curr->prev->next = curr->next;
     }
@@ -110,7 +105,6 @@ void deleteLast() {
     while (curr->next) {
         curr = curr->next;
     }
-    Node* last = curr;
     curr->prev->next = nullptr;
     delete curr;
 }
