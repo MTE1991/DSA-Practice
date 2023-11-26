@@ -59,7 +59,6 @@ void insertAtEnd(int data) {
         }
         curr->next = newNode;
         newNode->prev = curr;
-        newNode->next = nullptr;
     }
 }
 
